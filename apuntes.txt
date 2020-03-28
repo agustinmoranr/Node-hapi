@@ -41,3 +41,34 @@ Clase 4: El objeto h
 Clase 5: plugins- añadiendo archivos estáticos
     Los plugins son módulos creados por terceros que le añaden o extienden funcionalidades
     a un framework o librería
+
+Clase 6: Plantillas con handlerbars
+    handlerbars es un motor de plantillas que nos permite inyectarle lógica a nuestros 
+    archivos html a partir de variables para que estos sean más dinámicos.
+
+    Los motores de plantillas responden a un tipo de sintaxis muy especifico, en el
+    caso de handlerbars para declarar una variable se utilizan llaves dobles {{}}
+    Y para declarar un bloque de instrucción (como if/each/etc) comienza con "#"
+     y se cierra con "/" 
+
+    ejemplo 
+    
+        <div class=""post"">
+            <h1>Author: {{fullName author}}</h1>
+            <div class=""body"">{{body}}</div>
+
+            <h1>Comments</h1>
+
+            {{#each comments}}
+                <h2>By {{fullName author}}</h2>
+                <div class=""body"">{{body}}</div>
+            {{/each}}
+        </div>
+
+        {
+            fullName author: "Agustín Moran Rivas"
+        }
+
+                // Author: Agustín Moran Rivas
+                    Comments
+                        by: Agustín Moran Rivas //
