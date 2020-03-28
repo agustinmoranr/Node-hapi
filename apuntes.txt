@@ -37,3 +37,7 @@ Clase 4: El objeto h
             .header() .type() .code()
         h.redirect
             h.redirect('url_a_re-direccionar') --> te re-direcciona a otro sitio
+
+Clase 5: plugins- añadiendo archivos estáticos
+    Los plugins son módulos creados por terceros que le añaden o extienden funcionalidades
+    a un framework o librería
