@@ -1,0 +1,39 @@
+Clase 1: Node js con hapi
+    ¿Qué es hapi?
+        Hapi es un framework de node que nos sirve para crear aplicaciones y 
+        servicios web
+        - Diseñados para proyectos grandes ya que esta pensado en aplicativos modulares
+        -Se basa en separar la configuración de la lógica de negocios
+        -Hay una forma definida de como deben ocurrir las cosas en el código.
+
+    Principales Usos:
+        -Aplicativos web 
+        -Api Rest :REST es cualquier interfaz entre sistemas que use HTTP para obtener 
+                   datos o generar operaciones sobre esos datos en todos los formatos 
+                   posibles, como XML y JSON
+        -Apis GraphQL: Lenguaje de consulta para API's
+        -Http Proxies
+        -Integrador de múltiples backends
+
+Clase 2: Historia y estado actual.
+    Hapi es creado por Eran Hammer. Hammer trabajaba en el equipo de movil de walmart 
+    y la empresa sufría con la alta demanda en los días de black friday.
+    Por lo que comienzan desarrollando hapi como un middleware para express, pero al no
+    ser lo suficientemente rentable, trabajan con director (otro framework) y al final 
+    deciden crear todo el framework desde cero, partiendo de la premisa de que es 
+    más importante la configuración que el código.
+        datos curiosos 
+            El nombre "Hapi" es derivado de "Http Api server"
+            Eran Hammer también es quien desarrollo la especificación Oauth
+            Oauth nos permite hacer loggin con servicios externos como facebook o google
+
+Clase 4: El objeto h
+    h Es un objeto que contiene las propiedades y utilidades necesarias para para definir
+    la información que le vamos a enviar al header 
+    tiene varios métodos, estos son los básicos
+        h.response
+            h.reponse crea el Objeto Response, el cual tiene las propiedades para definir
+            los headers, type, y el status de la petición 
+            .header() .type() .code()
+        h.redirect
+            h.redirect('url_a_re-direccionar') --> te re-direcciona a otro sitio
