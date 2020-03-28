@@ -110,3 +110,16 @@ CLASE 9: Definiendo una mejor estructura del proyecto.
 
     El patrón MVC (Model vista controlador) es uno de los patrones de arquitectura más
     utilizados en el desarrollo backend y es el que utilizaremos en el proyecto.
+
+CLASE 10: Validando la información con Joi 
+    Si bien hacer validaciones de la informacion del cliente se hace desde el frontend
+    es buena práctica hacerla también en el backend. Es por eso que hapi tiene un plugin 
+    llamado joi, el cual nos permite hacer esquemas de las validaciones que necesitamos.
+        npm i @hapi/joi
+    Ejemplo de un Schema con joi
+
+        const schema = Joi.object({
+            a: Joi.string()
+        });
+
+    Api documentation for Joi https://hapi.dev/module/joi/#usage
