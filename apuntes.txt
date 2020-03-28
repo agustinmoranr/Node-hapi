@@ -77,3 +77,29 @@ http://handlebarsjs.com/guide/#what-is-handlebars // Api documentación
 Clase 7: Renderizado de vistas
     Documentación de @hapi/vision 
     https://hapi.dev/module/vision/
+
+Clase 8: Recibiendo parámetros en un ruta post.
+    El objeto "request" nos permite obtener información de la petición hecha por el cliente
+    y es el primero parámetro que recibe la ruta
+    Ahora... El objeto request cuenta con varias propiedades 
+        request.path --> La ruta accedida
+
+        request.method --> método usado en la peticion (get, post, put, delete) 
+
+        reques.params --> parámetros incluidos en la url
+
+        request.query --> Parámetros incluidos en el query de la URL 
+
+        request.paylaod --> valor de los parametros recibidos en peticiones POST y PUT
+
+    Ciclo de vida 
+        A la hora de hacer un request, el objeto request tiene varios eventos que nosotros 
+        podemos escuchar y ejecutar código en alguna de esas etapas.
+        Estos son algunos de los eventos:
+            OnRequest
+            OnPreAuth
+            OnCredentials
+            OnPostAuth
+            OnPreHandler
+            OnPostHandler
+            OnPreResponse
