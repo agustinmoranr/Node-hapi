@@ -72,3 +72,8 @@ Clase 6: Plantillas con handlerbars
                 // Author: Agustín Moran Rivas
                     Comments
                         by: Agustín Moran Rivas //
+http://handlebarsjs.com/guide/#what-is-handlebars // Api documentación
+
+Clase 7: Renderizado de vistas
+    Documentación de @hapi/vision 
+    https://hapi.dev/module/vision/
