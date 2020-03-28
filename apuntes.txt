@@ -84,13 +84,13 @@ Clase 8: Recibiendo parámetros en un ruta post.
     Ahora... El objeto request cuenta con varias propiedades 
         request.path --> La ruta accedida
 
-        request.method --> método usado en la peticion (get, post, put, delete) 
+        request.method --> método usado en la petición (get, post, put, delete) 
 
-        reques.params --> parámetros incluidos en la url
+        request.params --> parámetros incluidos en la url
 
         request.query --> Parámetros incluidos en el query de la URL 
 
-        request.paylaod --> valor de los parametros recibidos en peticiones POST y PUT
+        request.paylaod --> valor de los parámetros recibidos en peticiones POST y PUT
 
     Ciclo de vida 
         A la hora de hacer un request, el objeto request tiene varios eventos que nosotros 
@@ -103,3 +103,10 @@ Clase 8: Recibiendo parámetros en un ruta post.
             OnPreHandler
             OnPostHandler
             OnPreResponse
+
+CLASE 9: Definiendo una mejor estructura del proyecto.
+    Es importante implementar una buena desde el     comienzo de un proyecto, para que este 
+    sea muchísimo más legible, escalable, y sobre todo más organizado.
+
+    El patrón MVC (Model vista controlador) es uno de los patrones de arquitectura más
+    utilizados en el desarrollo backend y es el que utilizaremos en el proyecto.

@@ -5,6 +5,7 @@ const handlebars = require('handlebars');
 const inert = require('@hapi/inert'); // plugin para servir archivos estáticos
 const path = require('path'); // modulo nativo de node para gestionar rutas
 const vision = require('@hapi/vision'); // plugin para hacer render de motores de plantillas 
+const routes = require('./routes');
 
 const server = Hapi.server({
     port: process.env.PORT || 3000,
@@ -31,47 +32,8 @@ const server = Hapi.server({
                 layoutPath: 'views' // ubicación de los layout  
             })
 
-            server.route({ //definimos las características de la ruta y req
-                method: 'GET',
-                path: '/',
-                handler: (req, h) => { //h es un objeto que nos ayuda a modificar la respuesta al cliente
-                   return h.view('index', { // h.view sirve una vista 
-                       title: "Home", // valor de nuestra variable de handlebars
-                   }) 
-
-                }
-            })
-
-            server.route({ 
-                method: 'GET',
-                path: '/register',
-                handler: (req, h) => { 
-                   return h.view('register', { 
-                       title: "Registro", 
-                   }) 
-                }
-            })
-
-            server.route({ 
-                method: 'POST',
-                path: '/create-user',
-                handler: (req, h) => { 
-                    console.log(req.payload)
-                   return 'Usuario creado';
-                }
-            })
-
-            server.route({
-                method: 'GET',
-                path: '/{param*}',
-                handler: {
-                    directory: {
-                        path: '.', // desde donde se serviran los archivos (osea el directorio actual que es public)
-                        index: ['index.html']  
-                    } 
-                }
-            })
-
+            server.route(routes)
+            
             await server.start();
         }
         catch(error) {
