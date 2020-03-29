@@ -39,6 +39,12 @@ module.exports = [
     },
     
     { 
+        method: 'GET',
+        path: '/logout',
+        handler: user.logout
+    },
+    
+    { 
         method: 'POST',
         path: '/validate-user',
         options: {

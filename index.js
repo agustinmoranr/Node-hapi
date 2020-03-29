@@ -22,6 +22,12 @@ const server = Hapi.server({
             await server.register(inert) //server.register registra el plugin 
             await server.register(vision)
 
+            server.state('user', {
+                ttl: 1000 * 60 * 60 * 24 * 7, //timeToLive de la cookie
+                isSecure: process.env.NODE_ENV === 'prod', //la cookie es segura en produccion
+                encoding: 'base64json' //cookie hecha en base 64 y de tipo json
+            })
+
             server.views ({ // método views para gestionar como utilizaremos nuestras vistas
                 engines: { //hapi puede utilizar distintos motores de plantillas
                     hbs: handlebars // asociamos el plugin al tipo de archivos .hbs

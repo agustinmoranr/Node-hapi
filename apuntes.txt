@@ -112,7 +112,7 @@ CLASE 9: Definiendo una mejor estructura del proyecto.
     utilizados en el desarrollo backend y es el que utilizaremos en el proyecto.
 
 CLASE 10: Validando la información con Joi 
-    Si bien hacer validaciones de la informacion del cliente se hace desde el frontend
+    Si bien hacer validaciones de la información del cliente se hace desde el frontend
     es buena práctica hacerla también en el backend. Es por eso que hapi tiene un plugin 
     llamado joi, el cual nos permite hacer esquemas de las validaciones que necesitamos.
         npm i @hapi/joi
@@ -141,3 +141,17 @@ Clase 13: Implementando el login y validación del usuario
 
     Es importante tener en cuenta que al recuperar los datos desde Firebase, la contraseña 
     viene cifrada, por lo que la validación debe hacerse comparando ambos datos con bcrypt.
+
+Clase 14: Autenticación de usuarios - Cookies y estado
+"Hay diferentes maneras de mantener el estado de autenticación de un usuario en un sistema.
+ Para este proyecto usaremos la forma más sencilla que es a través de una cookie y usando 
+ el state de Hapi.
+
+Con la función server.state( '<nombre de la cookie>', { <opciones> } ) definimos las 
+características de la _ cookie_ que usaremos en la ruta definida para hacer la validación.
+Luego asignaremos los datos propios de la autenticación a esta cookie en el controlador, 
+en la misma instrucción en la que hacemos el redirect al Home, luego de validado el usuario.
+
+Habiendo guardado el estado de la autenticación, podemos definir entonces diferentes opciones
+en el Layout que nos permitan por ejemplo, hacer Logout y mostrar la información del usuario, 
+entre otras cosas.

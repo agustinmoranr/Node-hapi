@@ -16,18 +16,29 @@ async function createUser (req, h) {
     return h.response(`Usuario creado. ID: ${result}`)
 }
 
+function logout (req, h) {
+    return h.redirect('/login').unstate('user')
+}
+
 async function validateUser (req, h) {
     let result;
     try {
         result = await users.validateUser(req.payload); //esperamos la validación del modelo
+        if(!result) {
+            return h.response('Contraseña y/o email incorrectos').code(401);
+        }
     } catch (error) {
         console.error(error)
         return h.response('Problemas validando el usuario').code(500)
     }
-    return result;
+    return h.redirect('/').state('user', { //redireccionamos al home y al añadir el estado, añadimos la cookie
+        name: result.name, // la cookie contendrá el nombre y email del usuario.
+        email: result.email
+    })
 }
 
 module.exports = {
     createUser: createUser,
     validateUser: validateUser,
+    logout: logout,
 }
