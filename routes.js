@@ -63,12 +63,17 @@ module.exports = [
 
     {
         method: 'GET',
-        path: '/{param*}',
+        path: '/assets/{param*}',
         handler: {
             directory: {
                 path: '.', // desde donde se serviran los archivos (osea el directorio actual que es public)
                 index: ['index.html']  
             } 
         }
+    },
+    {
+        method: ['GET', 'POST'], // decimos que estos dos métodos pueden caer en esta ruta
+        path: '/{any*}', // si ninguna de las rutas esta definida o retorna algo, entonces caerá aquí
+        handler: site.notFound
     }
 ]

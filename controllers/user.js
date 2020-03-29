@@ -12,9 +12,15 @@ async function createUser (req, h) {
     }
     catch(err) {
         console.error(err);
-        return h.response('Problemas creando al usuario').code(500);
+        return h.view('register', { // manejamos los errores de una forma más visual
+            title: 'Registro',
+            error: 'Error creando usuario'
+        })
     }
-    return h.response(`Usuario creado. ID: ${result}`)
+    return h.view('register', {
+        title: 'Registro',
+        success: 'Usuario Creado exitosamente'
+    })
 }
 
 function logout (req, h) { // con.unstate quitamos la cookie al usuario y volvemos al home 
@@ -26,11 +32,17 @@ async function validateUser (req, h) {
     try {
         result = await users.validateUser(req.payload); //esperamos la validación del modelo
         if(!result) {
-            return h.response('Contraseña y/o email incorrectos').code(401);
+            return h.view('login', {
+                title: 'Login',
+                error: 'Contraseña y/o email incorrectos'
+            })
         }
     } catch (error) {
         console.error(error)
-        return h.response('Problemas validando el usuario').code(500)
+        return h.view('login', {
+            title: "Login",
+            error: 'Problemas validando el usuario' 
+        })
     }
     return h.redirect('/').state('user', { //redireccionamos al home y al añadir el estado, añadimos la cookie
         name: result.name, // la cookie contendrá el nombre y email del usuario.

@@ -29,8 +29,14 @@ function login (req, h) {
     })
 }
 
+function notFound (req, h) {
+    return h.view('404', {}, { layout: 'error-layout' }).code(404);
+    // view.(vista a renderizar, parámetros, objeto que nos permite cambiar propiedades de vision) 
+}
+
  module.exports = {
      home: home,
      register: register,
      login: login,
+     notFound: notFound,
  }
