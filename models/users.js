@@ -23,6 +23,26 @@ class User {
         const newUser = this.collection.push(user); // creamos nuevas referencias dentro de la collecion 
         return newUser.key; // devolvemos la ref del objeto creado (el id del usuario)
     } 
+
+    async validateUser (data) { //data es el payload del controlador de user.js
+        const userQuery =
+            await this.collection
+            .orderByChild('email') // Ordenamos por email
+            .equalTo(data.email) // firebase muestra todos los hijos con el mismo email que consultamos
+            .once('value'); // .once('value') fuerza a devolver un valor (correcto/incorrecto)
+        const userFound = userQuery.val();
+        if (userFound) { //usuario encontrado
+            const userId = Object.keys(userFound)[0]; //extraemos el id-clave del objeto del usuario
+            const passwdRight = await bcrypt.compare(data.password, userFound[userId].password) //comparamos ambos password (payload, database)
+            const result =
+            (passwdRight) //condición
+            ? userFound[userId] //retornamos el objeto del usuario
+            : false
+
+            return result;
+        }
+        return false; // si no se encuentra ningún usuario
+    }
     
     static async encrypt (passwd) { //vamos a encriptar el password
         const saltRounds = 10; // veces que se ejecutara el algoritmo de encriptado

@@ -123,3 +123,21 @@ CLASE 10: Validando la información con Joi
         });
 
     Api documentation for Joi https://hapi.dev/module/joi/#usage
+
+Clase 12: Creando un modelo y almacenando en firebase.
+    documentación..
+        https://www.npmjs.com/package/firebase-admin --> firebase
+        https://www.npmjs.com/package/bcrypt --> bcrypt
+
+Clase 13: Implementando el login y validación del usuario
+    Teniendo el modelo de Usuario ya definido, podemos pasar a la implementación del Login,
+    para lo cual creamos una nueva vista y agregaremos un método en el controlador, además
+    de las rutas correspondientes para el login y la validación de usuarios.
+
+    Al hacer un query sobre los registros almacenados en Firebase, el resultado devuelto 
+    es un objeto JSON con los resultados, en los que las keys de cada elemento corresponden
+    con los IDs de cada usuario. Aún cuando el resultado devuelto es sólo un registro, 
+    la estructura es la misma.
+
+    Es importante tener en cuenta que al recuperar los datos desde Firebase, la contraseña 
+    viene cifrada, por lo que la validación debe hacerse comparando ambos datos con bcrypt.

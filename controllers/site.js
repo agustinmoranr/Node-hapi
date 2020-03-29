@@ -12,7 +12,14 @@ function register (req, h) {
     }) 
  } 
 
+function login (req, h) {
+    return h.view('login', {
+        title: "Ingresar"
+    })
+}
+
  module.exports = {
      home: home,
      register: register,
+     login: login,
  }
