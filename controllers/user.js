@@ -2,6 +2,7 @@
 
 // Este controlador se encarga de registrar un usuario en la base datos
 
+const Boom = require('boom');
 const { users } = require('../models/index');
 
 async function createUser (req, h) { 
@@ -16,8 +17,8 @@ async function createUser (req, h) {
     return h.response(`Usuario creado. ID: ${result}`)
 }
 
-function logout (req, h) {
-    return h.redirect('/login').unstate('user')
+function logout (req, h) { // con.unstate quitamos la cookie al usuario y volvemos al home 
+    return h.redirect('/login').unstate('user');  // al hacer logout
 }
 
 async function validateUser (req, h) {
@@ -37,8 +38,14 @@ async function validateUser (req, h) {
     })
 }
 
+function failValidation (req, h, err) {
+    //usamos Boom para indicar un error en caso de que la validación falle( como que el correo sea incorrecto)
+    return Boom.badRequest('Fallo la validación', req.payload);
+}
+
 module.exports = {
     createUser: createUser,
     validateUser: validateUser,
     logout: logout,
+    failValidation: failValidation,
 }

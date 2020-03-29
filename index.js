@@ -48,5 +48,15 @@ const server = Hapi.server({
         }
         console.log(`Servidor ejecutándose en el puerto: ${server.info.uri}`)
     }
+
+    //unhandlerRejection y unhandlerException son errores de proceso generales, que todo proyecto 
+    // debería de controlar como mínimo
+    process.on('unhandledRejection', error => {
+        console.error("UnhandlerRejection:", error.message, error)
+    });
+
+    process.on('unhandledException', error => {
+        console.error("UnhandlerException:", error.message, error)
+    });
     
 init();

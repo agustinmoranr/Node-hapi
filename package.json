@@ -21,6 +21,7 @@
     "@hapi/joi": "^17.1.1",
     "@hapi/vision": "^6.0.0",
     "bcrypt": "^4.0.1",
+    "boom": "^7.3.0",
     "firebase-admin": "^8.10.0",
     "handlebars": "^4.7.3"
   }

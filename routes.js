@@ -26,7 +26,8 @@ module.exports = [
                     name: Joi.string().required().min(3),
                     email: Joi.string().email().required(),
                     password: Joi.string().required().min(6)
-                })
+                }),
+                failAction: user.failValidation // se ejecuta cuando halla un error durante la validación
             } 
         },
         handler: user.createUser
@@ -52,7 +53,9 @@ module.exports = [
                 payload: Joi.object({
                     email: Joi.string().email().required(),
                     password: Joi.string().required().min(6)
-                })
+                }),
+                failAction: user.failValidation
+
             } 
         },
         handler: user.validateUser
