@@ -1,3 +1,9 @@
+Recurso del curso.
+    https://static.platzi.com/media/public/uploads/slides-hapi_e893650d-809c-49c3-8b28-ff130eff9df0.pdf
+
+    Base de datos en firebase
+    https://console.firebase.google.com/u/0/project/platzioverflow-3cde8/database/platzioverflow-3cde8/data
+    
 Clase 1: Node js con hapi
     ¿Qué es hapi?
         Hapi es un framework de node que nos sirve para crear aplicaciones y 
@@ -186,5 +192,22 @@ Clase 16: Visualizando errores
     recordar indicar en el tercer argumento de la función view, el objeto con la propiedad layout para indicar el 
     nuevo layout que mostrará el error.
 
+Clase 17: 
+El error 404 que ya estamos controlando es el que está relacionado con las rutas de nuestra 
+aplicación, sin embargo, falta controlar la visualización de este mismo tipo de error para 
+los archivos estáticos que usamos en nuestra interfaz y que estamos cargando con inert. 
+Para esto haremos una nueva función en el controlador del sitio para el manejo de not found 
+de los archivos estáticos.
+
+Básicamente lo que haremos será interceptar el error de boom devuelto por inert con 
+response.isBoom y analizar si su código es 404 para redireccionar entonces a la 
+vista apropiada. Para poder hacer la intercepción del error y alterar el 
+life cycle del request, es necesario indicar la siguiente instrucción 
+server.ext( 'onPreResponse', handler ) antes de la definición de las rutas en el script 
+principal.
+
+Cuando interceptamos el life cycle de un request, debemos hacer un .takeover() para 
+forzar la finalización del ciclo, y esto lo hacemos luego del code(n) en el llamado 
+a la vista.
 
 

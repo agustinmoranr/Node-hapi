@@ -51,11 +51,18 @@ async function validateUser (req, h) {
 }
 
 function failValidation (req, h, err) {
-    //usamos Boom para indicar un error en caso de que la validación falle( como que el correo sea incorrecto)
-    return Boom.badRequest('Fallo la validación', req.payload);
+    const templates = { // definimos la plantilla que tendremos que imprimir
+        "/create-user": 'register', // cuando falle una validación
+        '/validate-user': 'login'
+    }
+    return h.view(templates[req.path], { // req.path accedemos a la ruta que esta mandando el error en templates
+        title: 'Error de validación',
+        error: 'Por favor complete los campos requeridos.'
+    }).code(400).takeover() // con .takeover forzamos la finalizacion del ciclo 
+        // ya que como estamos interceptando el req, este se detiene
 }
 
-module.exports = {
+module.exports = {      
     createUser: createUser,
     validateUser: validateUser,
     logout: logout,
