@@ -6,7 +6,7 @@ const Boom = require('boom');
 const { users } = require('../models/index');
 
 async function createUser (req, h) { 
-    let result;
+    let result
     try {
         result = await users.create(req.payload); //creamos el usuario con los datos del payload
     }
