@@ -1,9 +1,18 @@
 'use strict'
 
-function home(req, h) { //h es un objeto que nos ayuda a modificar la respuesta al cliente
+const { questions } = require('../models/index');
+
+async function home(req, h) { //h es un objeto que nos ayuda a modificar la respuesta al cliente
+    let data;
+    try {
+        data = await questions.getLast(10);
+    } catch (error) {
+        console.error(error)
+    }
     return h.view('index', { // h.view sirve una vista 
         title: "Home", // valor de nuestra variable de handlebars
-        user: req.state.user
+        user: req.state.user,
+        questions: data
     }) 
  }
 
@@ -44,10 +53,21 @@ function fileNotFound(req, h) {
                     // validación anterior no ocurra
 }
 
+function ask (req, h) {
+    if(!req.state.user) {
+        return h.redirect('/login');
+    }
+    return h.view('ask', {
+        title: 'Crear pregunta',
+        user: req.state.user, // --> nuestra cookie
+    })
+}
+
  module.exports = {
      home: home,
      register: register,
      login: login,
      notFound: notFound,
      fileNotFound: fileNotFound,
+     ask: ask,
  }

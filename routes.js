@@ -3,6 +3,7 @@
 const site = require('./controllers/site')
 const user = require('./controllers/user')
 const Joi = require('@hapi/joi');
+const question = require('./controllers/question');
 
 module.exports = [
     { //definimos las características de la ruta y req
@@ -44,6 +45,12 @@ module.exports = [
         path: '/logout',
         handler: user.logout
     },
+
+    { 
+        method: 'GET',
+        path: '/ask',
+        handler: site.ask
+    },
     
     { 
         method: 'POST',
@@ -59,6 +66,22 @@ module.exports = [
             } 
         },
         handler: user.validateUser
+    },
+
+    {
+        method: 'POST',
+        path: '/create-question',
+        options: {
+            validate: {
+                payload: Joi.object({
+                    title: Joi.string().required(),
+                    description: Joi.string().required()
+                }), 
+                failAction: user.failValidation 
+            
+            }
+        },
+        handler: question.createQuestion
     },
 
     {

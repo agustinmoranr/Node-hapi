@@ -53,7 +53,8 @@ async function validateUser (req, h) {
 function failValidation (req, h, err) {
     const templates = { // definimos la plantilla que tendremos que imprimir
         "/create-user": 'register', // cuando falle una validación
-        '/validate-user': 'login'
+        '/validate-user': 'login',
+        "/create-question": 'ask',
     }
     return h.view(templates[req.path], { // req.path accedemos a la ruta que esta mandando el error en templates
         title: 'Error de validación',

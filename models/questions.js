@@ -8,11 +8,24 @@ class Questions {
     }
 
     async create(data, user) {
-        data.owner = user; // agregamos el usuario que viene en la cookie
+
+        const ask = {
+            ...data
+        }
+        console.log(ask) 
+
+        ask.owner = user; // agregamos el usuario que viene en la cookie
+        console.log(ask.owner)
         const question = this.collection.push() // creamos una nueva referencia
-        question.set(data);
+        question.set(ask);
 
         return question.key; // retornamos el key, id de firebase
+    }
+
+    async getLast(amount) {
+        let query = await this.collection.limitToLast(amount).once('value');
+        let data = query.val();
+        return data;
     }
 }
 
