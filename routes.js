@@ -7,9 +7,9 @@ const question = require('./controllers/question');
 
 module.exports = [
     { //definimos las características de la ruta y req
-    method: 'GET',
-    path: '/',
-    handler: site.home
+        method: 'GET',
+        path: '/',
+        handler: site.home
     },
 
     { 
@@ -45,13 +45,19 @@ module.exports = [
         path: '/logout',
         handler: user.logout
     },
+    
+    { 
+        method: 'GET',
+        path: '/question/{id}',
+        handler: site.viewQuestion,
+    },
 
     { 
         method: 'GET',
         path: '/ask',
         handler: site.ask
     },
-    
+
     { 
         method: 'POST',
         path: '/validate-user',
@@ -78,7 +84,6 @@ module.exports = [
                     description: Joi.string().required()
                 }), 
                 failAction: user.failValidation 
-            
             }
         },
         handler: question.createQuestion
