@@ -23,8 +23,14 @@ class Questions {
     }
 
     async getLast(amount) {
-        let query = await this.collection.limitToLast(amount).once('value');
-        let data = query.val();
+        const query = await this.collection.limitToLast(amount).once('value');
+        const data = query.val();
+        return data;
+    }
+
+    async getOne(id) {
+        const query = await this.collection.child(id).once('value');
+        const data = query.val();
         return data;
     }
 }
