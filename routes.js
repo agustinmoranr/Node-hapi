@@ -59,8 +59,8 @@ module.exports = [
     },
 
     { 
-        method: 'POST',
         path: '/validate-user',
+        method: 'POST',
         options: {
             validate: {
                 payload: Joi.object({
@@ -75,8 +75,8 @@ module.exports = [
     },
 
     {
-        method: 'POST',
         path: '/create-question',
+        method: 'POST',
         options: {
             validate: {
                 payload: Joi.object({
@@ -87,6 +87,21 @@ module.exports = [
             }
         },
         handler: question.createQuestion
+    },
+
+    {
+        path: '/answer-question',
+        method: 'POST',
+        options: {
+            validate: {
+                payload: Joi.object({
+                    answer: Joi.string().required(),
+                    id: Joi.string().required()
+                }), 
+                failAction: user.failValidation 
+            }
+        },
+        handler: question.answerQuestion
     },
 
     {
