@@ -15,7 +15,11 @@
           Creada por <strong>{{answer.user.name}}</strong>
         </div>
         <div class="col-sm text-right">
-
+          {{#with user}} <!-- Validamos si hay un usuario o no-->
+            {{#ifEquals ../../question.owner.email ../../user.email}} <!-- Comparamos el usuario credo con el logeado(si no esta logeado por ende tampoco) -->
+              <a href="" class="btn btn-primary" role="button">Elegir respuesta correcta</a>
+            {{/ifEquals}}
+          {{/with}}
         </div>
       </div>
     </div>
@@ -32,7 +36,12 @@
           <form method="POST" action="/answer-question">
             <div class="form-group">
               <label for="answer">Respuesta</label>
-              <textarea class="form-control" id="answer" name="answer" placeholder="Ingrese la respuesta" required></textarea>
+              <textarea 
+                class="form-control" 
+                id="answer" 
+                name="answer" 
+                placeholder="Ingrese la respuesta" required>
+              </textarea>
               <input type="hidden" name="id" value="{{key}}" /> <!-- Enviamos la variable key (oculta), que sería el id de nuestra answer-->
             </div>
             <div class="text-center mt-5">

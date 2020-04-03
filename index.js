@@ -1,18 +1,12 @@
 'use strict'
 
 const Hapi = require('@hapi/hapi');
-const handlebars = require('handlebars');
+const handlebars = require('./lib/helpers');
 const inert = require('@hapi/inert'); // plugin para servir archivos estáticos
 const path = require('path'); // modulo nativo de node para gestionar rutas
 const vision = require('@hapi/vision'); // plugin para hacer render de motores de plantillas 
 const routes = require('./routes');
 const site = require('./controllers/site');
-
-
-handlebars.registerHelper('answerNumber', (answers) => {
-    const keys = Object.keys(answers) // creamos un arreglo de llaves a partir de la collecion
-    return keys.length // para poder usar .length y mostrar la cantidad de respuestás que hay
-})
 
 const server = Hapi.server({
     port: process.env.PORT || 3000,
