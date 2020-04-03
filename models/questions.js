@@ -1,38 +1,31 @@
 'use strict'
 
 class Questions {
-    constructor(db) { // recibe la instancia de firebase (la base de datos)
-        this.db = db;
-        this.ref = this.db.ref('/'); // creamos una referencia a la raíz
-        this.collection = this.ref.child('questions'); // creamos la colección de questions
-    }
+  constructor (db) {
+    this.db = db
+    this.ref = this.db.ref('/')
+    this.collection = this.ref.child('questions')
+  }
 
-    async create(data, user) {
+  async create (data, user) {
+    data.owner = user
+    const question = this.collection.push()
+    question.set(data)
 
-        const ask = {
-            ...data
-        }
-        console.log(ask) 
+    return question.key
+  }
 
-        ask.owner = user; // agregamos el usuario que viene en la cookie
-        console.log(ask.owner)
-        const question = this.collection.push() // creamos una nueva referencia
-        question.set(ask);
+  async getLast (amount) {
+    const query = await this.collection.limitToLast(amount).once('value')
+    const data = query.val()
+    return data
+  }
 
-        return question.key; // retornamos el key, id de firebase
-    }
-
-    async getLast(amount) {
-        const query = await this.collection.limitToLast(amount).once('value');
-        const data = query.val();
-        return data;
-    }
-
-    async getOne(id) {
-        const query = await this.collection.child(id).once('value');
-        const data = query.val();
-        return data;
-    }
+  async getOne (id) {
+    const query = await this.collection.child(id).once('value')
+    const data = query.val()
+    return data
+  }
 }
 
-module.exports = Questions;
+module.exports = Questions
