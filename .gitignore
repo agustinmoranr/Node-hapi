@@ -1,5 +1,6 @@
 node_modules
+.DS_Store
 .vscode
-apuntes.txt
 config
 .env
+package-lock.json
