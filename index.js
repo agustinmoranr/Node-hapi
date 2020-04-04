@@ -7,6 +7,7 @@ const path = require('path'); // modulo nativo de node para gestionar rutas
 const vision = require('@hapi/vision'); // plugin para hacer render de motores de plantillas 
 const routes = require('./routes');
 const site = require('./controllers/site');
+const methods = require('./lib/methods')
 
 const server = Hapi.server({
     port: process.env.PORT || 3000,
@@ -22,6 +23,7 @@ async function init () {
     try{
         await server.register(inert) //server.register registra el plugin 
         await server.register(vision)
+        await server.method('setAnswerRight', methods.setAnswerRight)
 
         server.state('user', {
             ttl: 1000 * 60 * 60 * 24 * 7, //timeToLive de la cookie
