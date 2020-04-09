@@ -3,12 +3,8 @@
 const { questions } = require('../models/index');
 
 async function home(req, h) { //h es un objeto que nos ayuda a modificar la respuesta al cliente
-    let data;
-    try {
-        data = await questions.getLast(10);
-    } catch (error) {
-        console.error(error)
-    }
+const data = await req.server.methods.getLast(10) // Implementamos nuestro método.
+
     return h.view('index', { // h.view sirve una vista 
         title: "Home", // valor de nuestra variable de handlebars
         user: req.state.user,

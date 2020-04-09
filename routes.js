@@ -9,6 +9,12 @@ module.exports = [
     { //definimos las características de la ruta y req
         method: 'GET',
         path: '/',
+        options: {
+            cache: { // cache en el lado del browser
+                expiresIn: 1000 * 30, // almacenamos en cache por 30s
+                privacy: 'private' // de manera privada
+            }
+        },
         handler: site.home
     },
 

@@ -23,7 +23,14 @@ async function init () {
     try{
         await server.register(inert) //server.register registra el plugin 
         await server.register(vision)
-        await server.method('setAnswerRight', methods.setAnswerRight)
+
+        server.method('setAnswerRight', methods.setAnswerRight)
+        server.method('getLast', methods.getLast, {
+            cache: {
+                expiresIn: 1000 * 60, // tiempo de cache en el server
+                generateTimeout: 2000 // si ocurre un error, se ejecuta después de 2 segundos
+            }
+        })
 
         server.state('user', {
             ttl: 1000 * 60 * 60 * 24 * 7, //timeToLive de la cookie
