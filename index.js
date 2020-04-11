@@ -3,6 +3,7 @@
 const Hapi = require('@hapi/hapi');
 const handlebars = require('./lib/helpers');
 const inert = require('@hapi/inert'); // plugin para servir archivos estáticos
+const good = require('@hapi/good')
 const path = require('path'); // modulo nativo de node para gestionar rutas
 const vision = require('@hapi/vision'); // plugin para hacer render de motores de plantillas 
 const routes = require('./routes');
@@ -23,6 +24,23 @@ async function init () {
     try{
         await server.register(inert) //server.register registra el plugin 
         await server.register(vision)
+
+        await server.register({
+            plugin: require('@hapi/good'),
+            options: {
+                // ops: {
+                //     interval: 2000
+                // },
+                reporters: {
+                    myConsoleReporters: [
+                        {
+                            module: require('@hapi/good-console')
+                        },
+                        'stdout',
+                    ]
+                }
+            }
+        })
 
         server.method('setAnswerRight', methods.setAnswerRight)
         server.method('getLast', methods.getLast, {
@@ -59,17 +77,17 @@ async function init () {
         console.error(error);
         process.exit(1);
     }
-    console.log(`Servidor ejecutándose en el puerto: ${server.info.uri}`)
+    server.log('info', `Servidor ejecutándose en el puerto: ${server.info.uri}`)
 }
 
 //unhandlerRejection y unhandlerException son errores de proceso generales, que todo proyecto 
 // debería de controlar como mínimo
 process.on('unhandledRejection', error => {
-    console.error("UnhandlerRejection:", error.message, error)
+    server.log("UnhandlerRejection:", error)
 });
 
 process.on('unhandledException', error => {
-    console.error("UnhandlerException:", error.message, error)
+    server.log("UnhandlerException:", error)
 });
     
 init();
