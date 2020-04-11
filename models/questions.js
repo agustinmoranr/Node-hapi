@@ -7,17 +7,24 @@ class Questions {
         this.collection = this.ref.child('questions'); // creamos la colección de questions
     }
 
-    async create(data, user) {
-
-        const ask = {
-            ...data
+    async create(info, user, filename) {
+        const data = {
+            description: info.description,
+            title: info.title,
+            owner: user
         }
-        console.log(ask) 
 
-        ask.owner = user; 
-        console.log(ask.owner)
+        if(filename) {
+            data.filename = filename // guardamos el nombre del archivo
+        }
+        // const ask = {
+        //     ...data
+        // }
+        // console.log(ask) 
+
+        data.owner = user; 
         const question = this.collection.push() 
-        question.set(ask);
+        question.set(data);
 
         return question.key; 
     }

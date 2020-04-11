@@ -48,14 +48,14 @@ module.exports = [
     
     { 
         method: 'GET',
-        path: '/logout',
-        handler: user.logout
-    },
-    
-    { 
-        method: 'GET',
         path: '/question/{id}',
         handler: site.viewQuestion,
+    },
+
+    { 
+        method: 'GET',
+        path: '/logout',
+        handler: user.logout
     },
 
     { 
@@ -74,7 +74,6 @@ module.exports = [
                     password: Joi.string().required().min(6)
                 }),
                 failAction: user.failValidation
-
             } 
         },
         handler: user.validateUser
@@ -84,16 +83,20 @@ module.exports = [
         path: '/create-question',
         method: 'POST',
         options: {
-            validate: {
-                payload: Joi.object({
-                    title: Joi.string().required(),
-                    description: Joi.string().required()
-                }), 
-                failAction: user.failValidation 
-            }
+          payload: {
+            multipart: true,
+          },
+          validate: {
+            payload: Joi.object({
+              title: Joi.string().required(),
+              description: Joi.string().required(),
+              image: Joi.any().optional(),
+            }),
+            failAction: user.failValidation,
+          },
         },
-        handler: question.createQuestion
-    },
+        handler: question.createQuestion,
+      },
 
     {
         path: '/answer-question',
