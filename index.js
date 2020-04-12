@@ -3,7 +3,8 @@
 const Hapi = require('@hapi/hapi');
 const handlebars = require('./lib/helpers');
 const inert = require('@hapi/inert'); // plugin para servir archivos estáticos
-const good = require('@hapi/good')
+const scooter = require('@hapi/scooter')
+const blankie = require('blankie')
 const path = require('path'); // modulo nativo de node para gestionar rutas
 const vision = require('@hapi/vision'); // plugin para hacer render de motores de plantillas 
 const routes = require('./routes');
@@ -50,6 +51,17 @@ async function init () {
                 }
             }
         })
+
+        await server.register([scooter, {
+            plugin: blankie,
+            options: {
+              defaultSrc: `'self' 'unsafe-inline'`,
+              styleSrc: `'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com`,
+              fontSrc: `'self' 'unsafe-inline' data:`,
+              scriptSrc: `'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://maxcdn.bootstrapcdn.com/ https://code.jquery.com/`,
+              generateNonces: false
+            }
+          }])
 
         await server.register({ // registramos el plugin de nuestra API
             plugin: require('./lib/api'),
