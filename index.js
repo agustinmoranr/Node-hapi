@@ -5,6 +5,7 @@ const handlebars = require('./lib/helpers');
 const inert = require('@hapi/inert'); // plugin para servir archivos estáticos
 const scooter = require('@hapi/scooter')
 const blankie = require('blankie')
+const hapiDevErrors = require('hapi-dev-errors');
 const path = require('path'); // modulo nativo de node para gestionar rutas
 const vision = require('@hapi/vision'); // plugin para hacer render de motores de plantillas 
 const routes = require('./routes');
@@ -62,6 +63,13 @@ async function init () {
               generateNonces: false
             }
           }])
+
+          await server.register({
+              plugin: hapiDevErrors,
+              options: {
+                  showErrors: process.env.NODE_ENV !== 'prod'
+              }
+          })
 
         await server.register({ // registramos el plugin de nuestra API
             plugin: require('./lib/api'),

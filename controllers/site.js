@@ -11,7 +11,6 @@ const data = await req.server.methods.getLast(10) // Implementamos nuestro méto
         questions: data
     }) 
  }
-
 function register (req, h) { 
     if(req.state.user) {
         return h.redirect('/')
