@@ -61,7 +61,7 @@ async function viewQuestion(req, h) {
     function fileNotFound(req, h) {
         const response = req.response; // obtenemos el response
         //interceptamos el error. Si es de boom y si tiene un status 404
-        if(response.isBoom && response.output.statusCode === 404){
+        if(!req.path.startsWith('/api') && response.isBoom && response.output.statusCode === 404){
         return h.view('404', {}, { layout: 'error-layout' }).code(404);
     }
     return h.continue // .continue continua el life cicle del request, en caso de que la
